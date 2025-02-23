@@ -1,0 +1,7 @@
+4 2 3
+DEFAULT
+JJ
+J
+KKK
+L
+L

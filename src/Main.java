@@ -2,6 +2,8 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        System.err.println("IQ Puzzler Pro");
+
         ArrayList<String> fileContent = IO.readFile();
         
         if (fileContent.isEmpty()) {
@@ -40,6 +42,9 @@ public class Main {
                 }
             } else {
                 System.out.println("Tidak ada solusi.");
+                System.out.println("Waktu pencarian: " + time + " ms.");
+                int count = solver.getCount();
+                System.out.println("Banyak kasus yang ditinjau: " + count);
             }
         
         }

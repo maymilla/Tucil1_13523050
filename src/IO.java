@@ -13,7 +13,7 @@ public class IO {
         String path = "Tucil1_13523050" + File.separator + "test" + File.separator + "Input" + File.separator + fileName;
         
         File file = new File(path);
-        System.out.println("Trying path: " + file.getAbsolutePath());
+        // System.out.println("Trying path: " + file.getAbsolutePath());
         
         if (file.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -46,9 +46,14 @@ public class IO {
         char currentLetter = ' ';
 
         for (String line : fileContent) {
-
-            char firstChar = line.charAt(0);
-
+            char firstChar = ' ';
+            int i;
+            for (i = 0; i < line.length(); i++){
+                if (line.charAt(i) != ' '){
+                    firstChar = line.charAt(i);
+                }
+            }
+            
             if (firstChar != currentLetter) {
                 if (!currentBlock.isEmpty()) {
                     blocksArray.add(new ArrayList<>(currentBlock));
@@ -56,13 +61,14 @@ public class IO {
                 }
                 currentLetter = firstChar;
             }
-
             currentBlock.add(line);
         }
 
         if (!currentBlock.isEmpty()) {
             blocksArray.add(new ArrayList<>(currentBlock));
         }
+
+        System.out.println(blocksArray);
 
         ArrayList<Block> blocks = new ArrayList<>();
         for (ArrayList<String> blockLines : blocksArray) {
@@ -75,18 +81,24 @@ public class IO {
 
                 Block block = new Block();
                 block.createBlock(maxSize);
-
-                for (int i = 0; i < blockLines.size(); i++) {
+                int i,  j;
+                for (i = 0; i < blockLines.size(); i++) {
                     String line = blockLines.get(i);
-                    for (int j = 0; j < line.length(); j++) {
-                        block.block[i][j] = String.valueOf(line.charAt(j));
+                    for (j = 0; j < line.length(); j++) {
+                        if (line.charAt(j) == ' '){
+                            block.block[i][j] = "-";
+                        } else {
+                            block.block[i][j] = String.valueOf(line.charAt(j));
+                        }
                     }
                 }
 
+                // block.fillBlock(blockLines);
+
                 blocks.add(block);
-                // System.out.println("Created piece:");
-                // block.printBlock();
-                // System.out.println();
+                System.out.println("Created piece:");
+                block.printBlock();
+                System.out.println();
             }
         }
 

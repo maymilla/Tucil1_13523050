@@ -1,5 +1,3 @@
-
-
 public class Block {
     public String block[][];
     public int size;
@@ -50,8 +48,8 @@ public class Block {
         hasil.createBlock(b.size);
         int i, j;
 
-        for(i=0; i<b.size; i++){
-            for(j=0; j<b.size; j++){
+        for(i = 0; i < b.size; i++){
+            for(j = 0; j < b.size; j++){
                 hasil.block[i][b.size-1-j] = b.block[i][j];
             }
         }
@@ -63,17 +61,19 @@ public class Block {
         hasil.createBlock(b.size);
         int i, j;
 
-        for(i=0; i<b.size; i++){
-            for(j=0; j<b.size; j++){
+        for(i = 0; i < b.size; i++){
+            for(j = 0; j < b.size; j++){
                 hasil.block[b.size-1-i][j] = b.block[i][j];
             }
         }
         return hasil;
    }
 
+
     public void printBlock() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        int i, j;
+        for (i = 0; i < size; i++) {
+            for (j = 0; j < size; j++) {
                 System.out.print(block[i][j] + " ");
             }
             System.out.println();

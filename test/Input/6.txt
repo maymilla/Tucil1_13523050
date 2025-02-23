@@ -1,0 +1,17 @@
+5 5 7
+DEFAULT
+MM
+MM
+M
+AA
+AA
+Y
+Y
+Y
+Y
+ZZ
+ ZZ
+LLL
+L
+ B
+SSS
