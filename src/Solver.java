@@ -16,45 +16,57 @@ public class Solver {
     }
     
     private void makeBoard() {
-        for (int i = 0; i < boardRow; i++) {
-            for (int j = 0; j < boardCol; j++) {
+        int i,j;
+        for (i = 0; i < boardRow; i++) {
+            for (j = 0; j < boardCol; j++) {
                 board[i][j] = "-";
             }
         }
     }
-    
+
     public boolean solve() {
-        if (pieces.isEmpty()) {
-            return boardFull();
+        if (pieces.isEmpty()) {  
+            return boardFull();  
         }
-        
-        Block currentPiece = pieces.remove(0);
-        ArrayList<Block> orientations = getAllOrientations(currentPiece);
-        
-        for (Block orientation : orientations) {
-            for (int row = 0; row < boardRow; row++) {
-                for (int col = 0; col < boardCol; col++) {
-                    if (canPlacePiece(orientation, row, col)) {
-                        count++;
-                        String pieceLetter = getPieceLetter(orientation);
-                        putPiece(orientation, row, col, pieceLetter);
-                        
+
+        Block currentPiece = pieces.remove(0);  
+
+        for (int i = 0; i < boardRow; i++) {
+            for (int j = 0; j < boardCol; j++) {
+                for (int k = 0; k < 4; k++) {  
+                    if (canPutPiece(currentPiece, i, j)) {
+                        putPiece(currentPiece, i, j, getPieceLetter(currentPiece));
                         if (solve()) {
-                            return true;
+                            return true;  
                         }
-                        
-                        removePiece(orientation, row, col);
+                        removePiece(currentPiece, i, j);
                     }
+                    currentPiece.rotate(currentPiece);
+                }
+
+                currentPiece.mirrorX(currentPiece); 
+                for (int k = 0; k < 4; k++) {  
+                    if (canPutPiece(currentPiece, i, j)) {
+                        putPiece(currentPiece, i, j, getPieceLetter(currentPiece));
+                        if (solve()) {
+                            return true; 
+                        }
+                        removePiece(currentPiece, i, j);
+                    }
+                    currentPiece.rotate(currentPiece);
                 }
             }
         }
+
         pieces.add(0, currentPiece);
         return false;
     }
+
     
     private String getPieceLetter(Block piece) {
-        for (int i = 0; i < piece.size; i++) {
-            for (int j = 0; j < piece.size; j++) {
+        int i, j;
+        for (i = 0; i < piece.size; i++) {
+            for (j = 0; j < piece.size; j++) {
                 if (!piece.block[i][j].equals("-")) {
                     return piece.block[i][j];
                 }
@@ -63,9 +75,10 @@ public class Solver {
         return "-";
     }
     
-    private boolean canPlacePiece(Block piece, int row, int col) {
-        for (int i = 0; i < piece.size; i++) {
-            for (int j = 0; j < piece.size; j++) {
+    private boolean canPutPiece(Block piece, int row, int col) {
+        int i, j;
+        for (i = 0; i < piece.size; i++) {
+            for (j = 0; j < piece.size; j++) {
                 if (!piece.block[i][j].equals("-")) {
                     if (row + i >= boardRow || col + j >= boardCol) {
                         return false;
@@ -80,8 +93,9 @@ public class Solver {
     }
     
     private void putPiece(Block piece, int row, int col, String id) {
-        for (int i = 0; i < piece.size; i++) {
-            for (int j = 0; j < piece.size; j++) {
+        int i, j;
+        for (i = 0; i < piece.size; i++) {
+            for (j = 0; j < piece.size; j++) {
                 if (!piece.block[i][j].equals("-")) {
                     board[row + i][col + j] = id;
                 }
@@ -90,8 +104,9 @@ public class Solver {
     }
     
     private void removePiece(Block piece, int row, int col) {
-        for (int i = 0; i < piece.size; i++) {
-            for (int j = 0; j < piece.size; j++) {
+        int i, j;
+        for (i = 0; i < piece.size; i++) {
+            for (j = 0; j < piece.size; j++) {
                 if (!piece.block[i][j].equals("-")) {
                     board[row + i][col + j] = "-";
                 }
@@ -100,8 +115,9 @@ public class Solver {
     }
     
     private boolean boardFull() {
-        for (int i = 0; i < boardRow; i++) {
-            for (int j = 0; j < boardCol; j++) {
+        int i, j;
+        for (i = 0; i < boardRow; i++) {
+            for (j = 0; j < boardCol; j++) {
                 if (board[i][j].equals("-")) {
                     return false;
                 }
@@ -110,58 +126,19 @@ public class Solver {
         return true;
     }
     
-    private ArrayList<Block> getAllOrientations(Block piece) {
-        ArrayList<Block> orientations = new ArrayList<>();
-        
-        Block current = new Block();
-        current.createBlock(piece.size);
-        copyBlock(piece, current);
-        
-        for (int i = 0; i < 4; i++) {
-            Block newOrientation = new Block();
-            newOrientation.createBlock(current.size);
-            copyBlock(current, newOrientation);
-            orientations.add(newOrientation);
-            
-            Block rotated = new Block();
-            rotated.createBlock(current.size);
-            copyBlock(current, rotated);
-            rotated.rotate(rotated);
-            current = rotated;
-        }
-        
-        Block mirrored = piece.mirrorX(piece);
-        current = new Block();
-        current.createBlock(mirrored.size);
-        copyBlock(mirrored, current);
-        
-        for (int i = 0; i < 4; i++) {
-            Block newOrientation = new Block();
-            newOrientation.createBlock(current.size);
-            copyBlock(current, newOrientation);
-            orientations.add(newOrientation);
-            
-            Block rotated = new Block();
-            rotated.createBlock(current.size);
-            copyBlock(current, rotated);
-            rotated.rotate(rotated);
-            current = rotated;
-        }
-        
-        return orientations;
-    }
-    
     private void copyBlock(Block b1, Block b2) {
-        for (int i = 0; i < b1.size; i++) {
-            for (int j = 0; j < b1.size; j++) {
+        int i, j;
+        for (i = 0; i < b1.size; i++) {
+            for (j = 0; j < b1.size; j++) {
                 b2.block[i][j] = b1.block[i][j];
             }
         }
     }
     
     public void printBoard() {
-        for (int i = 0; i < boardRow; i++) {
-            for (int j = 0; j < boardCol; j++) {
+        int i, j;
+        for (i = 0; i < boardRow; i++) {
+            for (j = 0; j < boardCol; j++) {
                 String pieceLetter = board[i][j];
                 System.out.print(getColorForLetter(pieceLetter) + pieceLetter + " \033[0m");
             }
