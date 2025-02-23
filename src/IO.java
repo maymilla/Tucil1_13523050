@@ -10,7 +10,7 @@ public class IO {
         System.out.print("Masukkan nama file: ");
         String fileName = scanner.nextLine();
         
-        String path = "Tucil1_13523050" + File.separator + "test" + File.separator + "Input" + File.separator + fileName;
+        String path = "../test" + File.separator + "Input" + File.separator + fileName;
         
         File file = new File(path);
         // System.out.println("Trying path: " + file.getAbsolutePath());
@@ -112,7 +112,7 @@ public class IO {
             System.out.println("Masukkan nama file: ");
             try {
                 nameFile = inputFile.readLine();
-                String path = "Tucil1_13523050/test/Output/" + nameFile;
+                String path = "../test/Output/" + nameFile;
 
                 File file = new File(path);
                 if (file.exists()) {
@@ -130,7 +130,7 @@ public class IO {
             }
 
             try {
-                FileWriter file = new FileWriter("Tucil1_13523050/test/Output/" + nameFile);
+                FileWriter file = new FileWriter("../test/Output/" + nameFile);
                 int i, j;
                 for(i = 0; i < board.length; i++){
                     for(j = 0; j < board[0].length; j++){
