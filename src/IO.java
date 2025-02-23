@@ -84,9 +84,9 @@ public class IO {
                 }
 
                 blocks.add(block);
-                System.out.println("Created piece:");
-                block.printBlock();
-                System.out.println();
+                // System.out.println("Created piece:");
+                // block.printBlock();
+                // System.out.println();
             }
         }
 

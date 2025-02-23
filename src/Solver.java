@@ -35,6 +35,7 @@ public class Solver {
             for (int j = 0; j < boardCol; j++) {
                 for (int k = 0; k < 4; k++) {  
                     if (canPutPiece(currentPiece, i, j)) {
+                        count++;
                         putPiece(currentPiece, i, j, getPieceLetter(currentPiece));
                         if (solve()) {
                             return true;  
@@ -47,6 +48,7 @@ public class Solver {
                 currentPiece.mirrorX(currentPiece); 
                 for (int k = 0; k < 4; k++) {  
                     if (canPutPiece(currentPiece, i, j)) {
+                        count++;
                         putPiece(currentPiece, i, j, getPieceLetter(currentPiece));
                         if (solve()) {
                             return true; 
@@ -62,7 +64,6 @@ public class Solver {
         return false;
     }
 
-    
     private String getPieceLetter(Block piece) {
         int i, j;
         for (i = 0; i < piece.size; i++) {
@@ -124,15 +125,6 @@ public class Solver {
             }
         }
         return true;
-    }
-    
-    private void copyBlock(Block b1, Block b2) {
-        int i, j;
-        for (i = 0; i < b1.size; i++) {
-            for (j = 0; j < b1.size; j++) {
-                b2.block[i][j] = b1.block[i][j];
-            }
-        }
     }
     
     public void printBoard() {

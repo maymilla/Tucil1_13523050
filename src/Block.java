@@ -1,14 +1,8 @@
 
-import java.util.ArrayList;
 
 public class Block {
-
     public String block[][];
     public int size;
-
-    public void toBlock(ArrayList a){
-
-    }
 
     public void createBlock(int size){
         String a[][];
@@ -76,24 +70,6 @@ public class Block {
         }
         return hasil;
    }
-
-   public void fillBlock(ArrayList<String> pattern) {
-        int max = 0;
-        
-        for (int i = 2; i < pattern.size(); i++) {
-            max = Math.max(max, pattern.get(i).length());
-        }
-        
-        createBlock(max);
-        
-        for (int i = 0; i < pattern.size() - 2 && i < size; i++) {
-            String line = pattern.get(i + 2);
-            for (int j = 0; j < line.length() && j < size; j++) {
-                block[i][j] = String.valueOf(line.charAt(j));
-            }
-        }
-    }
-
 
     public void printBlock() {
         for (int i = 0; i < size; i++) {
