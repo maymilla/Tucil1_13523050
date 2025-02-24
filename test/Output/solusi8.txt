@@ -1,0 +1,5 @@
+Y M M L L 
+Y M M Z L 
+Y M Z Z L 
+Y S Z A A 
+S S S A A 

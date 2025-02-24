@@ -7,7 +7,7 @@ public class IO {
     public static BufferedReader inputFile = new BufferedReader(new InputStreamReader(System.in));
 
     public static ArrayList<String> readFile() {
-        System.out.print("Masukkan nama file: ");
+        System.out.print("Masukkan nama file (contoh: 1.txt) ");
         String fileName = scanner.nextLine();
         
         String path = "../test" + File.separator + "Input" + File.separator + fileName;
@@ -68,7 +68,7 @@ public class IO {
             blocksArray.add(new ArrayList<>(currentBlock));
         }
 
-        System.out.println(blocksArray);
+        //System.out.println(blocksArray);
 
         ArrayList<Block> blocks = new ArrayList<>();
         for (ArrayList<String> blockLines : blocksArray) {
@@ -96,9 +96,9 @@ public class IO {
                 // block.fillBlock(blockLines);
 
                 blocks.add(block);
-                System.out.println("Created piece:");
-                block.printBlock();
-                System.out.println();
+                // System.out.println("Created piece:");
+                // block.printBlock();
+                // System.out.println();
             }
         }
 
@@ -107,9 +107,9 @@ public class IO {
 
     public static void writeFile(String[][] board) {
             String nameFile = "";
-            System.out.println("Current working directory: " + System.getProperty("user.dir"));
+            //System.out.println("Current working directory: " + System.getProperty("user.dir"));
 
-            System.out.println("Masukkan nama file: ");
+            System.out.println("Masukkan nama file (contoh: solusi.txt) ");
             try {
                 nameFile = inputFile.readLine();
                 String path = "../test/Output/" + nameFile;

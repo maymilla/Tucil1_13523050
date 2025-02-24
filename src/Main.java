@@ -2,18 +2,46 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.err.println("IQ Puzzler Pro");
+        System.err.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+        System.err.println("  IQ Puzzler Pro Solver  ");
+        System.err.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-");
 
         ArrayList<String> fileContent = IO.readFile();
         
         if (fileContent.isEmpty()) {
             System.out.println("File kosong atau tidak ditemukan.");
         } else {
-            String[] firstLIne = fileContent.get(0).split(" ");
-            int row = Integer.parseInt(firstLIne[0]);
-            int col = Integer.parseInt(firstLIne[1]);
-            int pieces = Integer.parseInt(firstLIne[2]);
-            String mode = fileContent.get(1);
+            String[] firstLine = fileContent.get(0).split(" ");
+            int row, col, pieces;
+            try {
+                row = Integer.parseInt(firstLine[0]);
+                col = Integer.parseInt(firstLine[1]);
+                pieces = Integer.parseInt(firstLine[2]);
+
+                if (row <= 0 || col <= 0) {
+                    System.out.println("Jumlah baris dan kolom harus bilangan bulat positif.");
+                    return;
+                }
+
+                if (pieces <= 0 || pieces > 26) {
+                    System.out.println("Jumlah potongan block harus di antara 1 dan 26.");
+                    return;
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Input format salah, pastikan jumlah baris, kolom, dan potongan block adalah bilangan bulat.");
+                return;
+            }
+
+            try {
+                String mode = fileContent.get(1);
+                if (!mode.equals("DEFAULT")){
+                    System.err.println("Mode harus DEFAULT.");
+                    return;
+                }
+            } catch (Exception e) {
+
+            }
 
             fileContent.remove(0);
             fileContent.remove(0);
