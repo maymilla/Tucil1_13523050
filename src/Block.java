@@ -43,19 +43,6 @@ public class Block {
         }
     }
 
-   public Block mirrorY(Block b){
-        Block hasil = new Block();
-        hasil.createBlock(b.size);
-        int i, j;
-
-        for(i = 0; i < b.size; i++){
-            for(j = 0; j < b.size; j++){
-                hasil.block[i][b.size-1-j] = b.block[i][j];
-            }
-        }
-        return hasil;
-   }
-
    public Block mirrorX(Block b){
     Block hasil = new Block();
         hasil.createBlock(b.size);

@@ -1,7 +1,16 @@
-4 2 3
+6 6 7
 DEFAULT
-JJ
-J
-KKK
-L
-L
+AAAA
+AAA
+BBB
+BB
+B
+CCCC
+ CC
+DDD
+DD
+E
+EEE
+FFF
+GG
+GG
